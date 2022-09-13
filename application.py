@@ -1,4 +1,8 @@
 from flask import Flask
+from flask import Flask, request, jsonify, make_response
+from flask_sqlalchemy import SQLAlchemy
+# from marshmallow import fields
+# from marshmallow_sqlalchemy import ModelSchema
 
 # print a nice greeting.
 def say_hello(username = "World"):
@@ -16,6 +20,9 @@ footer_text = '</body>\n</html>'
 
 # EB looks for an 'application' callable by default.
 application = Flask(__name__)
+application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost:3306/todo'
+db = SQLAlchemy(application)
+
 
 # add a rule for the index page.
 application.add_url_rule('/', 'index', (lambda: header_text +
