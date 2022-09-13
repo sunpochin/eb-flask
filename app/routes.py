@@ -6,7 +6,11 @@ from flask import request
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 
-@app.route("/book/list", methods=["GET"])
+@app.route("/", methods=["GET"])
+def hello():
+  return "Hello! Welcome to my bookstore."
+
+@app.route("/book", methods=["GET"])
 def get_books():
     books = Book.query.all()
     return jsonify([book.to_json() for book in books])
